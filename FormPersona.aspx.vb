@@ -76,20 +76,30 @@ Public Class FormPersona
     End Sub
 
     Protected Sub gvPersonas_RowUpdating(sender As Object, e As GridViewUpdateEventArgs)
+        Try
+            Dim id As Integer = Convert.ToInt32(gvPersonas.DataKeys(e.RowIndex).Value)
+            Dim persona = New Persona With {
+                .Nombre = e.NewValues("Nombre"),
+                .Apellido1 = e.NewValues("Apellido1"),
+                .Apellido2 = e.NewValues("Apellido2"),
+                .FechaNacimiento = e.NewValues("FechaNacimiento"),
+                .Telefono = e.NewValues("Telefono"),
+                .Nacionalidad = e.NewValues("Nacionalidad"),
+                .IdPersona = id
+            }
 
-
-        Dim id As Integer = Convert.ToInt32(gvPersonas.DataKeys(e.RowIndex).Value)
-        Dim persona As Persona = New Persona With {
-            .Nombre = e.NewValues("Nombre"),
-            .Apellido1 = e.NewValues("Apellido"),
-            .Apellido2 = e.NewValues("Apellido"),
-            .FechaNacimiento = e.NewValues("Edad"),
-            .IdPersona = id
-        }
-        dbHelper.update(persona)
-        gvPersonas.DataBind()
-        e.Cancel = True
-        gvPersonas.EditIndex = -1
+            Dim mensaje = dbHelper.update(persona)
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, "Error", mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, mensaje)
+            End If
+            gvPersonas.DataBind()
+            e.Cancel = True
+            gvPersonas.EditIndex = -1
+        Catch ex As Exception
+            SwalUtils.ShowSwalError(Me, "Error al actulizar la persona", ex.Message)
+        End Try
 
     End Sub
 

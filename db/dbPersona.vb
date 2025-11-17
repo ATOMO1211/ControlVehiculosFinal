@@ -7,7 +7,7 @@ Public Class dbPersona
 
     Public Function create(Persona As Persona) As String
         Try
-            Dim sql As String = "INSERT INTO Personas (Nombre, Apellido, Apellido2, Nacionalidad, fechaNacimiento, Telefono) 
+            Dim sql As String = "INSERT INTO Personas (Nombre, Apellido1, Apellido2, Nacionalidad, fechaNacimiento, Telefono) 
             VALUES (@Nombre, @Apellido1, @Apellido2, @Nacionalidad, @fechaNacimiento, @Telefono)"
             Dim Parametros As New List(Of SqlParameter) From {
                 New SqlParameter("@Nombre", Persona.Nombre),

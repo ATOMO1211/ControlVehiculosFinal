@@ -124,9 +124,13 @@ Public Class FormPersona
             .Nombre = txtNombre.Text(),
             .Apellido1 = txtApellido1.Text(),
             .Apellido2 = txtApellido2.Text(),
+            .Nacionalidad = txtNacionalidad.Text(),
+            .Telefono = txtTelefono.Text(),
             .FechaNacimiento = txtfechaNacimiento.Text(),
             .IdPersona = editando.Value()
-        }
+            }
+
+
         dbHelper.update(persona)
         gvPersonas.DataBind()
         gvPersonas.EditIndex = -1

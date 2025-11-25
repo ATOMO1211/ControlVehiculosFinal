@@ -2,7 +2,7 @@
 Imports System.Security.Cryptography
 
 Public Class dbPersona
-    Public ReadOnly ConectionString As String = ConfigurationManager.ConnectionStrings("II46ConnectionString").ConnectionString
+
     Private ReadOnly dbHelper = New DbHelper() ' Clase para manejar conexiones y consultas
 
     Public Function create(Persona As Persona) As String
